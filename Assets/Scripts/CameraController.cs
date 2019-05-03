@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     {
         player = SerializeManager.i.playerController.gameObject.transform;
         playerToCamSec = transform.position - player.position;
-        Debug.Log(playerToCamSec);
     }
 
     // Update is called once per frame
