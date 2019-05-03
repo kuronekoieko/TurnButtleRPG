@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class PlayerController : MonoBehaviour
     bool isDoMoveX;
     Sequence sequence;
     float walkSpeed;
+    float doMoveTargetZ;
+    float takeOffPointZ;
+    Vector3 tapPos;
+
 
     public void Init()
     {
@@ -21,11 +26,50 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         float dx = Input.GetAxis("Horizontal") * walkSpeed;
         float dz = Input.GetAxis("Vertical");
-        float x = transform.position.x;
-        float y = transform.position.y;
-        float z = transform.position.z;
+        float keyZ = dz != 0 ? Mathf.Sign(dz) : 0;
+        //Debug.Log(dx);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            tapPos = Input.mousePosition;
+            //Debug.Log(tapPos);
+        }
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 swipeVec = Input.mousePosition - tapPos;
+            //Debug.Log(swipeVec);
+            float theta = (float)(Mathf.Atan2(swipeVec.y, swipeVec.x) * 180 / Math.PI);
+            //Debug.Log(theta);
+            if (Mathf.Abs(theta) > 100)
+            {
+                dx = -walkSpeed;
+            }
+
+            if (80 > Mathf.Abs(theta) && Mathf.Abs(theta) > 0)
+            {
+                dx = walkSpeed;
+            }
+
+            if (100 > theta && theta > 80)
+            {
+                keyZ = 1;
+            }
+            if (-80 > theta && theta > -100)
+            {
+                keyZ = -1;
+            }
+        }
+
+
+
+
+
+
+
+
 
         RoadController road = GetRoad();
         if (!road) return;
@@ -34,12 +78,22 @@ public class PlayerController : MonoBehaviour
             case RoadType.HORIZONTAL:
                 break;
             case RoadType.VERTICAL:
+                /*  if (dz != 0)
+                    {
+                        sequence.Pause();
+                        isDoMoveZ = false;
+                        doMoveTargetZ = takeOffPointZ;
+                        DoMoveZ(Mathf.Sign(dz));
+                    }*/
+
+
                 break;
             case RoadType.T:
-                if (dz < 0) VerticalMove(dz, road.transform.position.x);
+
+                if (keyZ < 0) VerticalMove(keyZ, road);
                 break;
             case RoadType.T_REVERSE:
-                if (dz > 0) VerticalMove(dz, road.transform.position.x);
+                if (keyZ > 0) VerticalMove(keyZ, road);
                 break;
             case RoadType.LEFT_STOP:
                 dx = LimitedDx(road, true, dx);
@@ -50,10 +104,12 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
-        transform.position = new Vector3(x + dx, y, z);
+        transform.Translate(dx, 0, 0);
 
         LocalScale(dx);
     }
+
+
 
     float LimitedDx(RoadController road, bool isLeft, float dx)
     {
@@ -74,11 +130,13 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
     }
 
-    void VerticalMove(float dz, float roadX)
+    void VerticalMove(float key, RoadController road)
     {
         walkSpeed = 0.15f;
-        DoMoveX(roadX);
-        DoMoveZ(Mathf.Sign(dz));
+        DoMoveX(road.transform.position.x);
+        takeOffPointZ = road.transform.position.z;
+        doMoveTargetZ = takeOffPointZ + 20.0f * key;
+        DoMoveZ(key);
 
     }
 
@@ -102,7 +160,7 @@ public class PlayerController : MonoBehaviour
         sequence = DOTween.Sequence();
         sequence.Append(
             transform
-        .DOMoveZ(transform.position.z + 20.0f * key, 1.5f)
+        .DOMoveZ(doMoveTargetZ, 1.5f)
         .SetEase(Ease.InOutSine)
         .OnComplete(() =>
         {
@@ -113,9 +171,7 @@ public class PlayerController : MonoBehaviour
         );
 
         isDoMoveZ = true;
-
     }
-
 
 
     RoadController GetRoad()
