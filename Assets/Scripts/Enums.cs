@@ -5,7 +5,7 @@ public enum RoadType : int
     VERTICAL = 2,
     T = 3,
     T_REVERSE = 4,
-    STOP = 5,
-
+    LEFT_STOP = 5,
+    RIGHT_STOP = 6,
 
 }

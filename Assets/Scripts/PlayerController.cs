@@ -41,8 +41,21 @@ public class PlayerController : MonoBehaviour
             case RoadType.T_REVERSE:
                 if (dz > 0) VerticalMove(dz, road.transform.position.x);
                 break;
-            case RoadType.STOP:
-
+            case RoadType.LEFT_STOP:
+                if (!road.stopProperty) break;
+                Debug.Log(road.stopProperty.stopPoint);
+                if (road.stopProperty.stopPoint > transform.position.x)
+                {
+                    dx = dx < 0 ? 0 : dx;
+                }
+                break;
+            case RoadType.RIGHT_STOP:
+                if (!road.stopProperty) break;
+                Debug.Log(road.stopProperty.stopPoint);
+                if (road.stopProperty.stopPoint < transform.position.x)
+                {
+                    dx = dx > 0 ? 0 : dx;
+                }
                 break;
             default:
                 break;

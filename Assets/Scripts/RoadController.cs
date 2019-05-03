@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RoadController : MonoBehaviour
 {
@@ -9,7 +10,14 @@ public class RoadController : MonoBehaviour
     {
         get { return _roadType; }
     }
-    void Init()
+
+    public StopRoadProperty stopProperty
+    {
+        get { return GetComponent<StopRoadProperty>(); }
+    }
+
+
+    public void Init()
     {
 
     }

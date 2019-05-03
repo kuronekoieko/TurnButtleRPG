@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2212415780314845958}
   - component: {fileID: 2212415780314845959}
   - component: {fileID: 2212415780314845956}
-  - component: {fileID: 2212415780314845957}
+  - component: {fileID: -614690551068733327}
   m_Layer: 0
-  m_Name: StopRoad
+  m_Name: LeftStopRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2212415780314845957
+--- !u!114 &-614690551068733327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2212415780314845954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab2bcb257ca549c29c876d21699eea0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9108f8934b5bd453cb839b8df4c88fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _roadType: 5
+  _stopPointOffset: -2.5
