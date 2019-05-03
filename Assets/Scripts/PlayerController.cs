@@ -42,20 +42,10 @@ public class PlayerController : MonoBehaviour
                 if (dz > 0) VerticalMove(dz, road.transform.position.x);
                 break;
             case RoadType.LEFT_STOP:
-                if (!road.stopProperty) break;
-                Debug.Log(road.stopProperty.stopPoint);
-                if (road.stopProperty.stopPoint > transform.position.x)
-                {
-                    dx = dx < 0 ? 0 : dx;
-                }
+                dx = LimitedDx(road, true, dx);
                 break;
             case RoadType.RIGHT_STOP:
-                if (!road.stopProperty) break;
-                Debug.Log(road.stopProperty.stopPoint);
-                if (road.stopProperty.stopPoint < transform.position.x)
-                {
-                    dx = dx > 0 ? 0 : dx;
-                }
+                dx = LimitedDx(road, false, dx);
                 break;
             default:
                 break;
@@ -63,6 +53,17 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(x + dx, y, z);
 
         LocalScale(dx);
+    }
+
+    float LimitedDx(RoadController road, bool isLeft, float dx)
+    {
+        if (!road.stopProperty) return dx;
+        float delta = road.stopProperty.stopPoint - transform.position.x;
+
+        int key = isLeft ? 1 : -1;
+        if (delta * key < 0) return dx;
+        if (dx * key >= 0) return dx;
+        return 0;
     }
 
     void LocalScale(float dx)
