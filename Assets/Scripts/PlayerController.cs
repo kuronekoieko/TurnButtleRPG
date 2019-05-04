@@ -7,7 +7,7 @@ using System;
 public class PlayerController : MonoBehaviour
 {
 
-
+    Rigidbody rb;
     bool isDoMoveZ;
     bool isDoMoveX;
     Sequence sequence;
@@ -15,11 +15,16 @@ public class PlayerController : MonoBehaviour
     float doMoveTargetZ;
     float takeOffPointZ;
     Vector3 tapPos;
-
+    float axis;
+    float time;
+    float axisTime;
+    float keyX;
+    float keyZ;
 
     public void Init()
     {
         walkSpeed = Constants.DEFAULT_WALK_SPEED;
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -27,66 +32,70 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        float dx = Input.GetAxis("Horizontal") * walkSpeed;
-        float dz = Input.GetAxis("Vertical");
-        float keyZ = dz != 0 ? Mathf.Sign(dz) : 0;
-        //Debug.Log(dx);
+        WalkRoad();
+
+
+    }
+
+    float GetAxisForTap()
+    {
+
+        if (axis == 1 || axis == -1)
+        {
+            return axis;
+        }
+        axisTime = time;
+        time += Time.deltaTime;
+        axis = Mathf.Clamp(keyX * Mathf.Sqrt(time) * 1.5f, -1, 1);
+        return axis;
+    }
+
+    float GetAxisForRerease()
+    {
+
+        time -= Time.deltaTime * 2;
+        if (time <= 0)
+        {
+            time = 0;
+            return 0;
+        }
+
+        axis = keyX * Mathf.Sqrt(time);
+        // Debug.Log(axis);
+        return axis;
+    }
+
+    void WalkRoad()
+    {
+        float dx;
 
         if (Input.GetMouseButtonDown(0))
         {
+            time = 0;
+            keyX = 0;
             tapPos = Input.mousePosition;
-            //Debug.Log(tapPos);
         }
         if (Input.GetMouseButton(0))
         {
-            Vector3 swipeVec = Input.mousePosition - tapPos;
-            //Debug.Log(swipeVec);
-            float theta = (float)(Mathf.Atan2(swipeVec.y, swipeVec.x) * 180 / Math.PI);
-            //Debug.Log(theta);
-            if (Mathf.Abs(theta) > 100)
-            {
-                dx = -walkSpeed;
-            }
-
-            if (80 > Mathf.Abs(theta) && Mathf.Abs(theta) > 0)
-            {
-                dx = walkSpeed;
-            }
-
-            if (100 > theta && theta > 80)
-            {
-                keyZ = 1;
-            }
-            if (-80 > theta && theta > -100)
-            {
-                keyZ = -1;
-            }
+            SetTapKeys();
+            dx = GetAxisForTap();
+        }
+        else
+        {
+            dx = GetAxisForRerease();
         }
 
 
 
-
-
-
-
-
-
+        dx *= walkSpeed;
         RoadController road = GetRoad();
-        if (!road) return;
-        switch (road.roadType)
+        RoadType roadType = RoadType.DEFAULT;
+        if (road) roadType = road.roadType;
+        switch (roadType)
         {
             case RoadType.HORIZONTAL:
                 break;
             case RoadType.VERTICAL:
-                /*  if (dz != 0)
-                    {
-                        sequence.Pause();
-                        isDoMoveZ = false;
-                        doMoveTargetZ = takeOffPointZ;
-                        DoMoveZ(Mathf.Sign(dz));
-                    }*/
-
-
                 break;
             case RoadType.T:
 
@@ -104,11 +113,37 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
-        transform.Translate(dx, 0, 0);
 
+        transform.Translate(dx, 0, 0);
         LocalScale(dx);
     }
 
+    void SetTapKeys()
+    {
+        Vector3 swipeVec = Input.mousePosition - tapPos;
+        float theta = (float)(Mathf.Atan2(swipeVec.y, swipeVec.x) * 180 / Math.PI);
+
+        float absTheta = Mathf.Abs(theta);
+        if (absTheta > 180 - Constants.HORIZONTAL_DEG)
+        {
+            keyX = -1;
+        }
+
+        if (Constants.HORIZONTAL_DEG > absTheta && absTheta > 0)
+        {
+            keyX = 1;
+        }
+
+        keyZ = 0;
+        if (180 - Constants.VERTICAL_DEG > theta && theta > Constants.VERTICAL_DEG)
+        {
+            keyZ = 1;
+        }
+        if (-Constants.VERTICAL_DEG > theta && theta > Constants.VERTICAL_DEG - 180)
+        {
+            keyZ = -1;
+        }
+    }
 
 
     float LimitedDx(RoadController road, bool isLeft, float dx)
@@ -132,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
     void VerticalMove(float key, RoadController road)
     {
-        walkSpeed = 0.15f;
+        walkSpeed = Constants.VIRTICAL_WALK_SPEED;
         DoMoveX(road.transform.position.x);
         takeOffPointZ = road.transform.position.z;
         doMoveTargetZ = takeOffPointZ + 20.0f * key;
@@ -145,7 +180,7 @@ public class PlayerController : MonoBehaviour
         if (isDoMoveX) return;
         isDoMoveX = true;
         transform
-            .DOMoveX(x, 0.8f)
+            .DOMoveX(x, Constants.DO_MOVE_X_SEC)
             .SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
@@ -160,10 +195,12 @@ public class PlayerController : MonoBehaviour
         sequence = DOTween.Sequence();
         sequence.Append(
             transform
-        .DOMoveZ(doMoveTargetZ, 1.5f)
+        .DOMoveZ(doMoveTargetZ, Constants.DO_MOVE_Z_SEC)
         .SetEase(Ease.InOutSine)
         .OnComplete(() =>
         {
+            time = 0;
+            axis = 0;
             isDoMoveZ = false;
             walkSpeed = Constants.DEFAULT_WALK_SPEED;
             sequence.Kill();
