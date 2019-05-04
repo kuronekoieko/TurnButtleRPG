@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Mathf.Clamp(playerToCamVec.x + playerController.dx / 4, -6, 6);
+        float x = Mathf.Clamp(playerToCamVec.x + playerController.dx / 3, -6, 6);
         playerToCamVec = new Vector3(x, playerToCamVec.y, playerToCamVec.z);
         transform.position = playerController.transform.position + playerToCamVec;
     }

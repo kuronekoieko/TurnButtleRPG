@@ -7,11 +7,15 @@ using System;
 public class PlayerController : MonoBehaviour
 {
 
-    Rigidbody rb;
+    // Rigidbody rb;
     bool isDoMoveZ;
     bool isDoMoveX;
     Sequence sequence;
-    float walkSpeed;
+    public float walkSpeed
+    {
+        private set;
+        get;
+    }
     float doMoveTargetZ;
     float takeOffPointZ;
     Vector3 tapPos;
@@ -20,22 +24,50 @@ public class PlayerController : MonoBehaviour
     float axisTime;
     float keyX;
     float keyZ;
-    [NonSerialized] public float dx;
+
+    public float dx
+    {
+        private set;
+        get;
+    }
+
+
+
+    public Vector3 walkVec
+    {
+        private set;
+        get;
+    }
     public void Init()
     {
         walkSpeed = Constants.DEFAULT_WALK_SPEED;
-        rb = GetComponent<Rigidbody>();
+        // rb = GetComponent<Rigidbody>();
+
     }
 
 
-
+    Vector3 oldPos;
     void Update()
     {
+        oldPos = transform.position;
+
+        //        Debug.Log(walkVec);
 
         WalkRoad();
 
+        LocalScale(dx);
+
+
+
 
     }
+
+    void LateUpdate()
+    {
+        walkVec = transform.position - oldPos;
+    }
+
+
 
     float GetAxisForTap()
     {
@@ -115,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Translate(dx, 0, 0);
-        LocalScale(dx);
+
     }
 
     void SetTapKeys()

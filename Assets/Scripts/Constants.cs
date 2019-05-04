@@ -9,4 +9,6 @@ public class Constants
     public static readonly float VERTICAL_DEG = 30;
     public static readonly float HORIZONTAL_DEG = 80;
 
+    public static readonly float CHARACTER_FOLLOW_OFFSET = 3;
+
 }
