@@ -14,7 +14,10 @@ public enum GameMode
 {
     WALK,
     BUTTLE_START,
+    CAM_MOVE,
+    CAM_MOVE_COMPLETED,
+    ENEMY_APPEAR,
     BUTTLE,
-    REZULT,
-    BUTTLE_END
+    RESULT,
+    BUTTLE_END,
 }

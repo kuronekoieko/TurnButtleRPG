@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     float axisTime;
     float keyX;
     float keyZ;
+    CapsuleCollider col;
 
     public float dx
     {
@@ -29,9 +30,18 @@ public class PlayerController : MonoBehaviour
     public void Init()
     {
         walkSpeed = Constants.DEFAULT_WALK_SPEED;
-
+        col = GetComponent<CapsuleCollider>();
     }
 
+    public void SwichCollider()
+    {
+        col.enabled = !col.enabled;
+    }
+
+    void RotateX(float x)
+    {
+
+    }
 
     float GetAxisForTap()
     {
@@ -208,6 +218,13 @@ public class PlayerController : MonoBehaviour
         isDoMoveZ = true;
     }
 
+    public void MoveButllePos(Vector3 pos)
+    {
+        transform
+             .DOMove(pos, 0.5f)
+             .SetEase(Ease.InOutSine);
+    }
+
 
     RoadController GetRoad()
     {
@@ -224,7 +241,7 @@ public class PlayerController : MonoBehaviour
         int distance = 10;
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.red);
 
         //もしRayにオブジェクトが衝突したら
         //                  ↓Ray  ↓Rayが当たったオブジェクト ↓距離

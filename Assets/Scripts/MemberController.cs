@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class MemberController : MonoBehaviour
 {
@@ -29,6 +30,13 @@ public class MemberController : MonoBehaviour
             float key = Mathf.Sign(targetToThisVec.x);
             LocalScale(key);
         }
+    }
+
+    public void MoveButllePos(Vector3 pos)
+    {
+        transform
+             .DOMove(pos, 0.5f)
+             .SetEase(Ease.InOutSine);
     }
 
     void LocalScale(float key)
