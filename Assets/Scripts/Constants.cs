@@ -1,3 +1,4 @@
+using UnityEngine;
 
 public class Constants
 {
@@ -10,5 +11,7 @@ public class Constants
     public static readonly float HORIZONTAL_DEG = 80;
 
     public static readonly float CHARACTER_FOLLOW_OFFSET = 3;
+    public static readonly Vector3 WALK_CAM_POS = new Vector3(0, 7.23f, -17.61f);
 
+    public static readonly float BUTTLE_START_SEC = 0.3f;
 }

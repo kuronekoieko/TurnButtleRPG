@@ -9,3 +9,12 @@ public enum RoadType : int
     RIGHT_STOP = 6,
 
 }
+
+public enum GameMode
+{
+    WALK,
+    BUTTLE_START,
+    BUTTLE,
+    REZULT,
+    BUTTLE_END
+}

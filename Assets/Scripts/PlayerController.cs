@@ -7,15 +7,10 @@ using System;
 public class PlayerController : MonoBehaviour
 {
 
-    // Rigidbody rb;
     bool isDoMoveZ;
     bool isDoMoveX;
     Sequence sequence;
-    public float walkSpeed
-    {
-        private set;
-        get;
-    }
+    float walkSpeed;
     float doMoveTargetZ;
     float takeOffPointZ;
     Vector3 tapPos;
@@ -31,42 +26,11 @@ public class PlayerController : MonoBehaviour
         get;
     }
 
-
-
-    public Vector3 walkVec
-    {
-        private set;
-        get;
-    }
     public void Init()
     {
         walkSpeed = Constants.DEFAULT_WALK_SPEED;
-        // rb = GetComponent<Rigidbody>();
 
     }
-
-
-    Vector3 oldPos;
-    void Update()
-    {
-        oldPos = transform.position;
-
-        //        Debug.Log(walkVec);
-
-        WalkRoad();
-
-        LocalScale(dx);
-
-
-
-
-    }
-
-    void LateUpdate()
-    {
-        walkVec = transform.position - oldPos;
-    }
-
 
 
     float GetAxisForTap()
@@ -97,7 +61,7 @@ public class PlayerController : MonoBehaviour
         return axis;
     }
 
-    void WalkRoad()
+    public void WalkRoad()
     {
 
 
@@ -138,16 +102,18 @@ public class PlayerController : MonoBehaviour
                 break;
             case RoadType.LEFT_STOP:
                 dx = LimitedDx(road, true, dx);
+                Params.gameMode = GameMode.BUTTLE_START;
                 break;
             case RoadType.RIGHT_STOP:
                 dx = LimitedDx(road, false, dx);
+
                 break;
             default:
                 break;
         }
 
         transform.Translate(dx, 0, 0);
-
+        LocalScale(dx);
     }
 
     void SetTapKeys()

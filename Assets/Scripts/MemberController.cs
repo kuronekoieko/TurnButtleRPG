@@ -5,17 +5,8 @@ using UnityEngine.AI;
 
 public class MemberController : MonoBehaviour
 {
-
-    NavMeshAgent agent;
-    PlayerController playerController;
-    [SerializeField] int partyNum;
+    //[SerializeField] int partyNum;
     [SerializeField] Transform target;
-
-    void Start()
-    {
-        playerController = SerializeManager.i.playerController;
-        agent = GetComponent<NavMeshAgent>();
-    }
 
     void Update()
     {
@@ -23,7 +14,7 @@ public class MemberController : MonoBehaviour
         FollowTarget();
     }
 
-    void FollowTarget()
+    public void FollowTarget()
     {
         Vector3 targetPos = target.position;
         Vector3 targetToThisVec = transform.position - targetPos;
