@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     float axisTime;
     float keyX;
     float keyZ;
-
+    [NonSerialized] public float dx;
     public void Init()
     {
         walkSpeed = Constants.DEFAULT_WALK_SPEED;
@@ -45,15 +45,15 @@ public class PlayerController : MonoBehaviour
             return axis;
         }
         axisTime = time;
-        time += Time.deltaTime;
-        axis = Mathf.Clamp(keyX * Mathf.Sqrt(time) * 1.5f, -1, 1);
+        time += Time.deltaTime * 2;
+        axis = Mathf.Clamp(keyX * Mathf.Sqrt(time), -1, 1);
         return axis;
     }
 
     float GetAxisForRerease()
     {
 
-        time -= Time.deltaTime * 2;
+        time -= Time.deltaTime * 4;
         if (time <= 0)
         {
             time = 0;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     void WalkRoad()
     {
-        float dx;
+
 
         if (Input.GetMouseButtonDown(0))
         {

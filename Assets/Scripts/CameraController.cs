@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    Transform player;
-    Vector3 playerToCamSec;
+    PlayerController playerController;
+    Vector3 playerToCamVec;
     public void Init()
     {
-        player = SerializeManager.i.playerController.gameObject.transform;
-        playerToCamSec = transform.position - player.position;
+        playerController = SerializeManager.i.playerController;
+        playerToCamVec = transform.position - playerController.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.position + playerToCamSec;
+        float x = Mathf.Clamp(playerToCamVec.x + playerController.dx / 4, -6, 6);
+        playerToCamVec = new Vector3(x, playerToCamVec.y, playerToCamVec.z);
+        transform.position = playerController.transform.position + playerToCamVec;
     }
 }
