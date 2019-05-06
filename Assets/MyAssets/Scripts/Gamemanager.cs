@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 
-public class Gamemanager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     PlayerController playerController;
     [SerializeField] CameraController cameraController;
@@ -13,6 +13,7 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] EnemyController enemyController;
 
     [SerializeField] RectTransform buttleUI;
+    [SerializeField] ButtleManager buttleManager;
     float time;
 
 
@@ -30,6 +31,8 @@ public class Gamemanager : MonoBehaviour
         }
         enemyController.Init();
         enemyController.SetCameraController(cameraController);
+
+        buttleManager.Init();
     }
 
     void FixedUpdate()
@@ -38,14 +41,13 @@ public class Gamemanager : MonoBehaviour
         {
             case GameMode.WALK:
                 cameraController.FollowPlayer();
-                Debug.Log("walk");
                 for (int i = 0; i < partyControllers.Length; i++)
                 {
                     partyControllers[i].Walk();
                 }
 
                 time += Time.fixedDeltaTime;
-                if (time > 5)
+                if (time > 1)
                 {
                     Params.gameMode = GameMode.BUTTLE_START;
                     time = 0;
@@ -74,6 +76,7 @@ public class Gamemanager : MonoBehaviour
                 Params.gameMode = GameMode.BUTTLE;
                 break;
             case GameMode.BUTTLE:
+                buttleManager.ButtleUpdate();
                 break;
             case GameMode.RESULT:
                 break;
