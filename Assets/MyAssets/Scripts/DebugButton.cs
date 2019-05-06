@@ -7,6 +7,6 @@ public class DebugButton : MonoBehaviour
     public void OnClick()
     {
 
-        Params.gameMode = GameMode.RESULT;
+        Params.gameMode = GameMode.BUTTLE_END;
     }
 }

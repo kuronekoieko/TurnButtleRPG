@@ -15,4 +15,6 @@ public class Constants
 
     public static readonly float BUTTLE_START_SEC = 0.3f;
     public static readonly float BUTTLE_DEG = 45;
+
+    public static readonly Vector3 BUTTLE_CAM_OFFSET = new Vector3(0, 4, 6);
 }

@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 
-public class MemberController : MonoBehaviour
+public class MemberController : PartyController
 {
     //[SerializeField] int partyNum;
     [SerializeField] Transform target;
 
-    void Update()
+    public override void Walk()
     {
-
         FollowTarget();
     }
 
@@ -27,24 +26,8 @@ public class MemberController : MonoBehaviour
 
         if (targetToThisVec.x != 0)
         {
-            float key = Mathf.Sign(targetToThisVec.x);
-            LocalScale(key);
+            SetLocalScaleX(-targetToThisVec.x);
         }
-    }
-
-    public void MoveButllePos(Vector3 pos)
-    {
-        transform
-             .DOMove(pos, 0.5f)
-             .SetEase(Ease.InOutSine);
-    }
-
-    void LocalScale(float key)
-    {
-        float scaleX = key == 0 ? transform.localScale.x : key;
-        float scaleY = transform.localScale.y;
-        float scaleZ = transform.localScale.z;
-        transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
     }
 
 }

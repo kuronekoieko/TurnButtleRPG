@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : PartyController
 {
 
     bool isDoMoveZ;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     float keyZ;
     CapsuleCollider col;
 
+
     public float dx
     {
         private set;
@@ -33,9 +34,9 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<CapsuleCollider>();
     }
 
-    public void SwichCollider()
+    public override void Walk()
     {
-        col.enabled = !col.enabled;
+        WalkRoad();
     }
 
     void RotateX(float x)
@@ -71,7 +72,8 @@ public class PlayerController : MonoBehaviour
         return axis;
     }
 
-    public void WalkRoad()
+
+    void WalkRoad()
     {
 
 
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case RoadType.LEFT_STOP:
                 dx = LimitedDx(road, true, dx);
-                Params.gameMode = GameMode.BUTTLE_START;
+
                 break;
             case RoadType.RIGHT_STOP:
                 dx = LimitedDx(road, false, dx);
@@ -123,7 +125,7 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Translate(dx, 0, 0);
-        LocalScale(dx);
+        SetLocalScaleX(dx);
     }
 
     void SetTapKeys()
@@ -165,13 +167,6 @@ public class PlayerController : MonoBehaviour
         return 0;
     }
 
-    void LocalScale(float dx)
-    {
-        float scaleX = dx == 0 ? transform.localScale.x : -Mathf.Sign(dx);
-        float scaleY = transform.localScale.y;
-        float scaleZ = transform.localScale.z;
-        transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
-    }
 
     void VerticalMove(float key, RoadController road)
     {
@@ -216,13 +211,6 @@ public class PlayerController : MonoBehaviour
         );
 
         isDoMoveZ = true;
-    }
-
-    public void MoveButllePos(Vector3 pos)
-    {
-        transform
-             .DOMove(pos, 0.5f)
-             .SetEase(Ease.InOutSine);
     }
 
 
