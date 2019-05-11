@@ -30,7 +30,7 @@ public class ButtleManager : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            ButtleInfo info = new ButtleInfo(CharactorStatus.i.list[i].skillID[0]);
+            ButtleInfo info = new ButtleInfo(DataManager.charactorStatusList[i].skillID[0]);
             ButtleStatus.i.players.Add(info);
         }
 
@@ -47,7 +47,7 @@ public class ButtleManager : MonoBehaviour
         for (int i = 0; i < playerButtleUIs.Length; i++)
         {
             int skillID = ButtleStatus.i.players[i].skillID;
-            playerButtleUIs[i].chosenSkillText.text = Skill.i.list[skillID].name;
+            playerButtleUIs[i].chosenSkillText.text = DataManager.skillList[skillID].name;
         }
 
         string a = "";
@@ -61,15 +61,14 @@ public class ButtleManager : MonoBehaviour
 
     bool IsButtonTap()
     {
-        //タップ検知したオブジェクトを取得
+        //タップ検知したGameObjectを取得。
         GameObject tapObj = EventSystem.current.currentSelectedGameObject;
-        //nullチェック
+        //取得したGameObjectがnullならばfalseを返す。
         if (!tapObj) { return false; }
-        //ボタンをもっているかどうかを判定
+        //取得したオブジェクトからButtonを取得。
         Button btn = tapObj.GetComponent<Button>();
-        if (btn) { return true; }
-        //ボタンをもっていないならfalseを返す
-        return false;
+        //ボタンが存在するかどうかを返す。
+        return btn;
     }
 
     void SkillButtonGenerator()

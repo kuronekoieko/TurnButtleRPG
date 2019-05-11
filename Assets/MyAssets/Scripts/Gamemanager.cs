@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] RectTransform buttleUI;
     [SerializeField] ButtleManager buttleManager;
+    [SerializeField] DataManager dataManager;
     float time;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        dataManager.Init();
         playerController = partyControllers[0].GetComponent<PlayerController>();
         playerController.Init();
         cameraController.Init(playerController);
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 time += Time.fixedDeltaTime;
-                if (time > 1)
+                if (time > 5)
                 {
                     Params.gameMode = GameMode.BUTTLE_START;
                     time = 0;

@@ -1064,15 +1064,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 121795814}
     m_Modifications:
-    - target: {fileID: -614690551068733327, guid: 35d097612820a44baa7d638c3bd276ac,
-        type: 3}
-      propertyPath: _stopPointOffset
-      value: -2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2212415780314845954, guid: 35d097612820a44baa7d638c3bd276ac,
         type: 3}
       propertyPath: m_Name
       value: LeftStopRoad (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -614690551068733327, guid: 35d097612820a44baa7d638c3bd276ac,
+        type: 3}
+      propertyPath: _stopPointOffset
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2212415780314845961, guid: 35d097612820a44baa7d638c3bd276ac,
         type: 3}
@@ -3054,6 +3054,51 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f48a95f3bf6174e368a82a33b95f5946, type: 3}
+--- !u!1 &826991448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826991451}
+  - component: {fileID: 826991449}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &826991449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826991448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1fef9f5d04eb45e8a774c2de5334589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charactorStatus: {fileID: 11400000, guid: af3d3b7d9e7d84686bec753dcb833cc1, type: 2}
+  skill: {fileID: 11400000, guid: 14219756a159c43a9aafa804df0e11f1, type: 2}
+--- !u!4 &826991451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826991448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &845177746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5180137874785990647, guid: 699cbda3c25e844ce9b294eab0f5e25d,
@@ -6040,7 +6085,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 19290048, z: 1e-45, w: 4.9e-44}
+  m_BoundingSphereOverride: {x: 0, y: 3.274081e-32, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -7519,6 +7564,7 @@ MonoBehaviour:
   enemyController: {fileID: 5210777747086476430}
   buttleUI: {fileID: 1585945322}
   buttleManager: {fileID: 2107725823}
+  dataManager: {fileID: 826991449}
 --- !u!4 &2119067655
 Transform:
   m_ObjectHideFlags: 0
@@ -8074,15 +8120,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 121795814}
     m_Modifications:
-    - target: {fileID: -614690551068733327, guid: 35d097612820a44baa7d638c3bd276ac,
-        type: 3}
-      propertyPath: _stopPointOffset
-      value: -2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2212415780314845954, guid: 35d097612820a44baa7d638c3bd276ac,
         type: 3}
       propertyPath: m_Name
       value: LeftStopRoad
+      objectReference: {fileID: 0}
+    - target: {fileID: -614690551068733327, guid: 35d097612820a44baa7d638c3bd276ac,
+        type: 3}
+      propertyPath: _stopPointOffset
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2212415780314845961, guid: 35d097612820a44baa7d638c3bd276ac,
         type: 3}

@@ -8,12 +8,6 @@ public class CharactorStatus : ScriptableObject
 
     public List<Parametor> list = new List<Parametor>();
 
-    public static CharactorStatus i;
-    void OnEnable()
-    {
-        i = this;
-    }
-
 }
 
 [System.Serializable]

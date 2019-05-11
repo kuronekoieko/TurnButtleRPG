@@ -6,12 +6,6 @@ using UnityEngine;
 public class Skill : ScriptableObject
 {
     public List<SkillInfo> list = new List<SkillInfo>();
-
-    public static Skill i;
-    void OnEnable()
-    {
-        i = this;
-    }
 }
 
 [System.Serializable]

@@ -22,8 +22,8 @@ public class PlayerButton : MonoBehaviour
 
             try
             {
-                skillID = CharactorStatus.i.list[playerNum].skillID[i];
-                skillName = Skill.i.list[skillID].name;
+                skillID = DataManager.charactorStatusList[playerNum].skillID[i];
+                skillName = DataManager.skillList[skillID].name;
             }
             catch (System.Exception)
             {

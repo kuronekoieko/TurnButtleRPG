@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtleStatus : MonoBehaviour
+public class ButtleStatus
 {
     static ButtleStatus _i = new ButtleStatus();
     public static ButtleStatus i

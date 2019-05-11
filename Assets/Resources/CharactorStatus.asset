@@ -18,22 +18,22 @@ MonoBehaviour:
     HP: 100
     level: 1
     speed: 0
-    skillID: 0000000001000000
+    skillID: 0100000002000000
   - CharacterID: 1
     name: "\u3057\u308D"
     HP: 200
     level: 1
     speed: 0
-    skillID: 000000000100000002000000
+    skillID: 010000000200000003000000
   - CharacterID: 2
     name: "\u304F\u308D"
     HP: 300
     level: 1
     speed: 0
-    skillID: 00000000
+    skillID: 01000000
   - CharacterID: 3
     name: "\u30B7\u30E3\u30E0\uFF1F"
     HP: 400
     level: 1
     speed: 0
-    skillID: 00000000010000000200000003000000
+    skillID: 01000000020000000300000004000000
