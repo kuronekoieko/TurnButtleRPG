@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ターンごとの攻撃情報を格納する
+/// </summary>
 public class ButtleStatus
 {
     static ButtleStatus _i = new ButtleStatus();

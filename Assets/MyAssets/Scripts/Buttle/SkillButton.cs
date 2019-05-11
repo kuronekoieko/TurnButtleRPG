@@ -14,6 +14,8 @@ public class SkillButton : MonoBehaviour
     public void OnClick()
     {
         skillChoosePanel.gameObject.SetActive(false);
+        //スキルなしの場合はバトルステータスを変更しない
+        if (skillID == 0) return;
         ButtleStatus.i.players[playerNum].skillID = skillID;
     }
 }
