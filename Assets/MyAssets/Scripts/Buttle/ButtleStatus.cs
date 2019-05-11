@@ -12,13 +12,17 @@ public class ButtleStatus
     {
         get { return _i; }
     }
+
+    //キャラクターごとの選択したスキルを格納するリスト
     public List<ButtleInfo> players = new List<ButtleInfo>();
 
+    public PlayerButton[] playerButtons;
+    public SkillButton[] skillButtons;
+    public OwnedCharactor[] partyMember;
 }
 
 public class ButtleInfo
 {
-    public CharactorStatus charactorStatus;
     public int skillID;
 
     public ButtleInfo(int skillID)

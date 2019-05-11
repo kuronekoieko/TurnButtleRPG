@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] PartyController[] partyControllers;
 
     [SerializeField] EnemyController enemyController;
-
-    [SerializeField] RectTransform buttleUI;
     [SerializeField] ButtleManager buttleManager;
     [SerializeField] DataManager dataManager;
     float time;
@@ -26,7 +24,6 @@ public class GameManager : MonoBehaviour
         playerController.Init();
         cameraController.Init(playerController);
         Params.gameMode = GameMode.WALK;
-        buttleUI.gameObject.SetActive(false);
         for (int i = 0; i < partyControllers.Length; i++)
         {
             partyControllers[i].SetCameraController(cameraController);
@@ -74,7 +71,7 @@ public class GameManager : MonoBehaviour
                 enemyController.gameObject.SetActive(true);
 
                 enemyController.transform.position = new Vector3(cameraController.centerX - 6, 1, cameraController.centerZ + 0);
-                buttleUI.gameObject.SetActive(true);
+                buttleManager.ButtleInitialize();
                 Params.gameMode = GameMode.BUTTLE;
                 break;
             case GameMode.BUTTLE:
@@ -83,7 +80,7 @@ public class GameManager : MonoBehaviour
             case GameMode.RESULT:
                 break;
             case GameMode.BUTTLE_END:
-                buttleUI.gameObject.SetActive(false);
+                buttleManager.ButtleFinalize();
                 enemyController.gameObject.SetActive(false);
                 for (int i = 0; i < partyControllers.Length; i++)
                 {

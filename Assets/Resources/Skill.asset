@@ -17,14 +17,59 @@ MonoBehaviour:
     name: '---'
     ATK: 0
   - skillID: 1
-    name: "\u304B\u307F\u3064\u304F"
+    name: "\u30C1\u30A7\u30F3\u30B8"
     ATK: 0
   - skillID: 2
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 10
     name: "\u30D1\u30F3\u30C1"
     ATK: 0
-  - skillID: 3
+  - skillID: 11
+    name: "\u3072\u3063\u304B\u304D"
+    ATK: 0
+  - skillID: 12
+    name: "\u304B\u307F\u3064\u304F"
+    ATK: 0
+  - skillID: 13
     name: "\u8E74\u308A"
     ATK: 0
-  - skillID: 4
-    name: "\u3072\u3063\u304B\u304D"
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
+    ATK: 0
+  - skillID: 0
+    name: '---'
     ATK: 0

@@ -3083,8 +3083,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1fef9f5d04eb45e8a774c2de5334589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactorStatus: {fileID: 11400000, guid: af3d3b7d9e7d84686bec753dcb833cc1, type: 2}
+  charactorStatus: {fileID: 0}
   skill: {fileID: 11400000, guid: 14219756a159c43a9aafa804df0e11f1, type: 2}
+  _userData: {fileID: 11400000, guid: fe400bd9c45454d9881a03ed32d5b9fc, type: 2}
 --- !u!4 &826991451
 Transform:
   m_ObjectHideFlags: 0
@@ -6085,7 +6086,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3.274081e-32, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 1e-45, w: 3.287886e-32}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -7437,12 +7438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f57ba461e3b3474095edf2300d24981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerButtleUIPrefab: {fileID: 6655175479462835957, guid: 0bb387e5f84ce4e7e8555a361429bee4,
+  playerButtonPrefab: {fileID: 314729313235562737, guid: add4e5eaa0eec424b8760d1105c06682,
     type: 3}
-  layer0: {fileID: 744803307}
+  layer0: {fileID: 744803308}
   skillChoosePanel: {fileID: 990105869}
   skillButtonPrefab: {fileID: 7900093959130712239, guid: 97032268e69c84355883ae1cb3d5b1b6,
     type: 3}
+  buttleUI: {fileID: 1585945322}
 --- !u!4 &2107725824
 Transform:
   m_ObjectHideFlags: 0
@@ -7562,7 +7564,6 @@ MonoBehaviour:
   - {fileID: 977622295}
   - {fileID: 1673240718}
   enemyController: {fileID: 5210777747086476430}
-  buttleUI: {fileID: 1585945322}
   buttleManager: {fileID: 2107725823}
   dataManager: {fileID: 826991449}
 --- !u!4 &2119067655
@@ -7573,7 +7574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119067653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18995714, y: 0.7608886, z: -6.565858}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

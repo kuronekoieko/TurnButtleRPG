@@ -5,6 +5,5 @@ using UnityEngine.UI;
 
 public class PlayerButtleUI : MonoBehaviour
 {
-    public PlayerButton playerButton;
     public Text chosenSkillText;
 }

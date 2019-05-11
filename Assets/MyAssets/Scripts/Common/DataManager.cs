@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [SerializeField] CharactorStatus charactorStatus;
     [SerializeField] Skill skill;
+    [SerializeField] UserData _userData;
 
-    public static List<Parametor> charactorStatusList;
     public static List<SkillInfo> skillList;
+
+    public static UserData userData;
 
     public void Init()
     {
-        charactorStatusList = charactorStatus.list;
         skillList = skill.list;
-
+        userData = _userData;
     }
 }
