@@ -7,15 +7,16 @@ using System.Linq;
 
 public class PlayerButton : MonoBehaviour
 {
-    [SerializeField] private Text chosenSkillText;
     RectTransform skillChoosePanel;
-    int partyMemberIndex;
+    public int partyMemberIndex;
     public Text buttonText;
+    public Text hpText;
+    public Text mpText;
 
-    public int hp;
-    public int mp;
 
-    public void Init(RectTransform parent, Vector3 pos, RectTransform skillChoosePanel, int partyMemberIndex)
+
+
+    public void Init(RectTransform parent, Vector3 pos, RectTransform skillChoosePanel)
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
         //layer0の子にする
@@ -24,8 +25,6 @@ public class PlayerButton : MonoBehaviour
         rectTransform.anchoredPosition = pos;
         //スキル選択パネルを入れる
         this.skillChoosePanel = skillChoosePanel;
-        //プレイヤー番号を設定
-        this.partyMemberIndex = partyMemberIndex;
     }
 
     /// <summary>
@@ -48,7 +47,7 @@ public class PlayerButton : MonoBehaviour
             }
             else
             {
-                skillID = ButtleStatus.i.partyMember[partyMemberIndex].status.buttleSkills[i];
+                skillID = ButtleStatus.i.partyMembers[partyMemberIndex].status.buttleSkills[i];
             }
             skillName = DataManager.skillList[skillID].name;
 
@@ -56,8 +55,5 @@ public class PlayerButton : MonoBehaviour
         }
     }
 
-    public void setSkillText(int skillID)
-    {
-        chosenSkillText.text = DataManager.skillList[skillID].name;
-    }
+
 }

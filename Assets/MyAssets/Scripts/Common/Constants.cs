@@ -17,4 +17,16 @@ public class Constants
     public static readonly float BUTTLE_DEG = 45;
 
     public static readonly Vector3 BUTTLE_CAM_OFFSET = new Vector3(0, 3, 5);
+
+    public static readonly float FIRST_PLAYER_UI_X = -560;
+    public static readonly float PLAYER_UI_OFFSET_X = 180;
+    public static readonly float PLAYER_UI_BUTTON_Y = -300;
+    public static readonly float PLAYER_UI_IMAGE_Y = -190;
+    public static readonly int PLAYER_UI_NUM = 4;
+
+    public static readonly float FIRST_SKILL_BUTTON_X = -500;
+    public static readonly float SKILL_BUTTON_OFFSET_X = 250;
+    public static readonly int SKILL_BUTTON_NUM = 5;
+
+
 }

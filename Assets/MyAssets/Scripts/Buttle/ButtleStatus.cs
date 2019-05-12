@@ -15,10 +15,9 @@ public class ButtleStatus
 
     //キャラクターごとの選択したスキルを格納するリスト
     public List<ButtleInfo> players = new List<ButtleInfo>();
-
-    public PlayerButton[] playerButtons;
     public SkillButton[] skillButtons;
-    public OwnedCharactor[] partyMember;
+    public OwnedCharactor[] partyMembers;
+    public PlayerUI[] playerUIs;
 }
 
 public class ButtleInfo

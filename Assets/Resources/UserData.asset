@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea703e99e11e44e08c78b41fcd5a889, type: 3}
   m_Name: UserData
   m_EditorClassIdentifier: 
-  partyMembers: 00000000010000000200000003000000
+  partyMemberIndexces: 00000000010000000200000003000000
   ownedCharactorList:
   - charactorSpec:
       name: "\u306F\u3044\u3044\u308D"

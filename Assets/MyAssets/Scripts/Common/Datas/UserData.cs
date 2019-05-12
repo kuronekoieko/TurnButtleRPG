@@ -8,7 +8,7 @@ public class UserData : ScriptableObject
 {
 
     //所有しているキャラのうち、パーティーメンバーにしているキャラのインデックスを格納
-    public int[] partyMembers;
+    public int[] partyMemberIndexces;
     //所有しているキャラクターのリスト
     public List<OwnedCharactor> ownedCharactorList;
 }

@@ -40,6 +40,6 @@ public class SkillButton : MonoBehaviour
         //攻撃するスキルIDをセット
         ButtleStatus.i.players[playerButtonNum].skillID = skillID;
         //スキルテキストを変更
-        ButtleStatus.i.playerButtons[playerButtonNum].setSkillText(skillID);
+        ButtleStatus.i.playerUIs[playerButtonNum].chosenSkillImage.setSkillText(skillID);
     }
 }
