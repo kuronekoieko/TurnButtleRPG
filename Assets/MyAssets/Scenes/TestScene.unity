@@ -7437,7 +7437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f57ba461e3b3474095edf2300d24981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerButtonPrefab: {fileID: 974518661886368649, guid: add4e5eaa0eec424b8760d1105c06682,
+  playerButtonPrefab: {fileID: 6173651404956347606, guid: add4e5eaa0eec424b8760d1105c06682,
     type: 3}
   chosenSkillImagePrefab: {fileID: 7857552945522700021, guid: a52930183270e40ea858befa7228f47b,
     type: 3}

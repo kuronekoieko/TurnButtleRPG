@@ -24,7 +24,8 @@ public class ButtleManager : MonoBehaviour
         skillChoosePanel.gameObject.SetActive(false);
         SkillButtonGenerator();
         PlayerButtleUIGenerator();
-        ButtleStatus.i.partyMembers = new OwnedCharactor[4];
+        int partyMemberNum = DataManager.userData.partyMemberIndexces.Length;
+        ButtleStatus.i.partyMembers = new OwnedCharactor[partyMemberNum];
     }
 
     /// <summary>
@@ -37,19 +38,6 @@ public class ButtleManager : MonoBehaviour
         SetButtlePartyMember();
 
         SetDefaultStatus();
-    }
-
-    void SetButtlePartyMember()
-    {
-        for (int i = 0; i < ButtleStatus.i.partyMembers.Length; i++)
-        {
-            //パーティメンバーの所有インデックスを取得
-            int ownedCharactorIndex = DataManager.userData.partyMemberIndexces[i];
-            //バトルに参加するパーティメンバーの配列にキャラクター情報を格納する
-            ButtleStatus.i.partyMembers[i] = DataManager.userData.ownedCharactorList[ownedCharactorIndex];
-            //ボタンにパーティメンバーのインデックスを割り当てる
-            ButtleStatus.i.playerUIs[i].playerButton.partyMemberIndex = i;
-        }
     }
 
     /// <summary>
@@ -70,6 +58,19 @@ public class ButtleManager : MonoBehaviour
         if (!IsButtonTap())
         {
             skillChoosePanel.gameObject.SetActive(false);
+        }
+    }
+
+    void SetButtlePartyMember()
+    {
+        for (int i = 0; i < ButtleStatus.i.partyMembers.Length; i++)
+        {
+            //パーティメンバーの所有インデックスを取得
+            int ownedCharactorIndex = DataManager.userData.partyMemberIndexces[i];
+            //バトルに参加するパーティメンバーの配列にキャラクター情報を格納する
+            ButtleStatus.i.partyMembers[i] = DataManager.userData.ownedCharactorList[ownedCharactorIndex];
+            //ボタンにパーティメンバーのインデックスを割り当てる
+            ButtleStatus.i.playerUIs[i].playerButton.partyMemberIndex = i;
         }
     }
 
