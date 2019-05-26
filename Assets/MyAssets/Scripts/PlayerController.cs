@@ -15,7 +15,7 @@ public class PlayerController : PartyController
     float takeOffPointZ;
     Vector3 tapPos;
     float axis;
-    [NonSerialized] public float time;
+    float time;
     float axisTime;
     float keyX;
     float keyZ;
@@ -36,9 +36,12 @@ public class PlayerController : PartyController
         WalkRoad();
     }
 
-    void RotateX(float x)
+    public void WalkFinalize()
     {
-
+        //バトル終了時に減速処理が動くのを防ぐ
+        time = 0;
+        //バトル終了時にaxisが1のまま減速できないのを防ぐ
+        axis = 0;
     }
 
     float GetAxisForTap()
@@ -49,15 +52,16 @@ public class PlayerController : PartyController
             return axis;
         }
         axisTime = time;
-        time += Time.deltaTime * 2;
+        time += Time.fixedDeltaTime * 3;
         axis = Mathf.Clamp(keyX * Mathf.Sqrt(time), -1, 1);
+        Debug.Log(axis);
         return axis;
     }
 
     float GetAxisForRerease()
     {
 
-        time -= Time.deltaTime * 4;
+        time -= Time.fixedDeltaTime * 6;
         if (time <= 0)
         {
             time = 0;

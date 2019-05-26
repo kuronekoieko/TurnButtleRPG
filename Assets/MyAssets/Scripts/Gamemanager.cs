@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameMode.CAM_MOVE_UP_START:
+                partyManager.playerController.WalkFinalize();
                 cameraController.MoveBattleStartCam();
 
                 Params.gameMode = GameMode.CAM_MOVE_UP;
@@ -107,7 +108,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        partyManager.ChangeRotate(cameraController.transform.localEulerAngles.x);
+        partyManager.SetRotate(cameraController.transform.localEulerAngles.x);
         enemyController.SetRotate(cameraController.transform.localEulerAngles.x);
     }
 

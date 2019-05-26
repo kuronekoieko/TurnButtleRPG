@@ -37,7 +37,6 @@ public class PartyManager : MonoBehaviour
 
     public void MoveBattlePos(CameraController cameraController)
     {
-        playerController.time = 0;
         Vector3 pos = new Vector3(cameraController.centerX + 6, 1, cameraController.centerZ + 4);
 
         for (int i = 0; i < partyControllers.Length; i++)
@@ -47,7 +46,7 @@ public class PartyManager : MonoBehaviour
         }
     }
 
-    public void ChangeRotate(float rotationX)
+    public void SetRotate(float rotationX)
     {
         for (int i = 0; i < partyControllers.Length; i++)
         {
