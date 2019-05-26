@@ -29,4 +29,5 @@ public enum GameMode
     CAM_MOVE_DOWN_START,//カメラ移動開始
     CAM_MOVE_DOWN,//カメラ移動中
     CAM_MOVE_DOWN_COMPLETED,//カメラ移動終了
+
 }

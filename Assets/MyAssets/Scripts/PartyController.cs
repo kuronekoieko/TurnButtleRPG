@@ -20,7 +20,7 @@ public abstract class PartyController : MonoBehaviour
              });
     }
 
-    public void MoveBeforeButllePos()
+    public void MoveBeforeBattlePos()
     {
         transform
              .DOMove(walkPos, 0.5f)
@@ -31,7 +31,7 @@ public abstract class PartyController : MonoBehaviour
              })
              .OnComplete(() =>
              {
-                 //Params.gameMode = GameMode.CAM_MOVE_DOWN_COMPLETED;
+                 Params.gameMode = GameMode.MEMBER_MOVE_WALK_POS_COMPLETED;
              });
     }
 

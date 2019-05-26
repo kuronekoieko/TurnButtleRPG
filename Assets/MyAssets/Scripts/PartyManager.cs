@@ -29,11 +29,11 @@ public class PartyManager : MonoBehaviour
     {
         for (int i = 0; i < partyControllers.Length; i++)
         {
-            partyControllers[i].MoveBeforeButllePos();
+            partyControllers[i].MoveBeforeBattlePos();
         }
     }
 
-    public void MoveButllePos(CameraController cameraController)
+    public void MoveBattlePos(CameraController cameraController)
     {
 
         Vector3 pos = new Vector3(cameraController.centerX + 6, 1, cameraController.centerZ + 4);

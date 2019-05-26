@@ -50,9 +50,17 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMode.CAM_MOVE_UP_COMPLETED:
                 cameraController.GetCenter();
-                partyManager.MoveButllePos(cameraController);
+                partyManager.MoveBattlePos(cameraController);
                 Params.gameMode = GameMode.ENEMY_APPEAR;
                 break;
+            case GameMode.MEMBER_MOVE_BATTLE_POS_START:
+                break;
+            case GameMode.MEMBER_MOVE_BATTLE_POS:
+                break;
+            case GameMode.MEMBER_MOVE_BATTLE_POS_COMPLETED:
+                break;
+
+
             case GameMode.ENEMY_APPEAR:
                 enemyController.gameObject.SetActive(true);
 
@@ -65,17 +73,31 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMode.RESULT:
                 break;
+
             case GameMode.BATTLE_END:
                 BattleManager.BattleFinalize();
                 enemyController.gameObject.SetActive(false);
+                Params.gameMode = GameMode.MEMBER_MOVE_WALK_POS_START;
+                break;
+
+            case GameMode.MEMBER_MOVE_WALK_POS_START:
                 partyManager.MoveWalkPosStart();
+                Params.gameMode = GameMode.MEMBER_MOVE_WALK_POS;
+                break;
+            case GameMode.MEMBER_MOVE_WALK_POS:
+                break;
+            case GameMode.MEMBER_MOVE_WALK_POS_COMPLETED:
+                Params.gameMode = GameMode.CAM_MOVE_DOWN_START;
+                break;
+
+            case GameMode.CAM_MOVE_DOWN_START:
+                cameraController.MoveBattleEndCam();
                 Params.gameMode = GameMode.CAM_MOVE_DOWN;
                 break;
             case GameMode.CAM_MOVE_DOWN:
-
                 break;
             case GameMode.CAM_MOVE_DOWN_COMPLETED:
-                cameraController.MoveBattleEndCam();
+
                 Params.gameMode = GameMode.WALK;
                 break;
             default:
