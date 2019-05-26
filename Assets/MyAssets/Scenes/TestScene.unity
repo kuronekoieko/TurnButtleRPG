@@ -2400,6 +2400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 622692704}
+  - component: {fileID: 622692705}
   m_Layer: 0
   m_Name: Party
   m_TagString: Untagged
@@ -2425,6 +2426,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &622692705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622692703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c246ca2f547b84661aa42dd82d5bbf84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!4 &626096341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5180137874785990647, guid: 699cbda3c25e844ce9b294eab0f5e25d,
@@ -3669,18 +3683,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2075112080}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &977622295 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1676276905676863389, guid: f48a95f3bf6174e368a82a33b95f5946,
-    type: 3}
-  m_PrefabInstance: {fileID: 2075112080}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f119bb9827654c0ebffc2c099668ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &990105868
 GameObject:
   m_ObjectHideFlags: 0
@@ -6202,18 +6204,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 799307166}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1673240718 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1676276905676863389, guid: f48a95f3bf6174e368a82a33b95f5946,
-    type: 3}
-  m_PrefabInstance: {fileID: 799307166}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f119bb9827654c0ebffc2c099668ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1692986397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7345,18 +7335,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1394712847}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2081032774 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1676276905676863389, guid: f48a95f3bf6174e368a82a33b95f5946,
-    type: 3}
-  m_PrefabInstance: {fileID: 1394712847}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f119bb9827654c0ebffc2c099668ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2084990085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5180137874785990647, guid: 699cbda3c25e844ce9b294eab0f5e25d,
@@ -7443,7 +7421,7 @@ GameObject:
   - component: {fileID: 2107725824}
   - component: {fileID: 2107725823}
   m_Layer: 5
-  m_Name: ButtleManager
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7458,7 +7436,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2107725822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f57ba461e3b3474095edf2300d24981, type: 3}
+  m_Script: {fileID: 11500000, guid: 11e5e604db2094b43baa77eb2f575674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerButtonPrefab: {fileID: 6173651404956347606, guid: add4e5eaa0eec424b8760d1105c06682,
@@ -7469,7 +7447,7 @@ MonoBehaviour:
   skillChoosePanel: {fileID: 990105869}
   skillButtonPrefab: {fileID: 7900093959130712239, guid: 97032268e69c84355883ae1cb3d5b1b6,
     type: 3}
-  buttleUI: {fileID: 1585945322}
+  BattleUI: {fileID: 1585945322}
 --- !u!4 &2107725824
 Transform:
   m_ObjectHideFlags: 0
@@ -7583,14 +7561,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 174395029}
-  partyControllers:
-  - {fileID: 1210288411}
-  - {fileID: 2081032774}
-  - {fileID: 977622295}
-  - {fileID: 1673240718}
   enemyController: {fileID: 5210777747086476430}
-  buttleManager: {fileID: 2107725823}
+  BattleManager: {fileID: 2107725823}
   dataManager: {fileID: 826991449}
+  partyManager: {fileID: 622692705}
 --- !u!4 &2119067655
 Transform:
   m_ObjectHideFlags: 0

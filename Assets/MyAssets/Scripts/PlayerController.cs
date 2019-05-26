@@ -15,18 +15,15 @@ public class PlayerController : PartyController
     float takeOffPointZ;
     Vector3 tapPos;
     float axis;
-    float time;
+    [NonSerialized] public float time;
     float axisTime;
     float keyX;
     float keyZ;
     CapsuleCollider col;
 
 
-    public float dx
-    {
-        private set;
-        get;
-    }
+    [NonSerialized] public float dx;
+
 
     public void Init()
     {
@@ -76,7 +73,6 @@ public class PlayerController : PartyController
     void WalkRoad()
     {
 
-
         if (Input.GetMouseButtonDown(0))
         {
             time = 0;
@@ -97,7 +93,6 @@ public class PlayerController : PartyController
 
 
         dx *= walkSpeed;
-        Debug.Log(dx);
         RoadController road = GetRoad();
         RoadType roadType = RoadType.DEFAULT;
         if (road) roadType = road.roadType;
