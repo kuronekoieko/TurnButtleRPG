@@ -6,7 +6,7 @@ using System;
 public class PartyManager : MonoBehaviour
 {
     [NonSerialized] public PartyController[] partyControllers;
-    PlayerController playerController;
+    public PlayerController playerController;
 
     public void Init()
     {
@@ -15,6 +15,8 @@ public class PartyManager : MonoBehaviour
         {
             partyControllers[i] = transform.GetChild(i).GetComponent<PartyController>();
         }
+        playerController = partyControllers[0].GetComponent<PlayerController>();
+        playerController.Init();
     }
 
     public void Walk()

@@ -97,6 +97,7 @@ public class PlayerController : PartyController
 
 
         dx *= walkSpeed;
+        Debug.Log(dx);
         RoadController road = GetRoad();
         RoadType roadType = RoadType.DEFAULT;
         if (road) roadType = road.roadType;
@@ -124,7 +125,7 @@ public class PlayerController : PartyController
             default:
                 break;
         }
-        //Debug.Log(dx);
+
         transform.Translate(dx, 0, 0);
         SetLocalScaleX(dx);
     }

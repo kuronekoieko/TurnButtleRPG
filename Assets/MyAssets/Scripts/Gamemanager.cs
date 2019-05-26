@@ -16,12 +16,15 @@ public class GameManager : MonoBehaviour
     float time;
 
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        //prayerPrefabをシングルトン化
         dataManager.Init();
+        //partyManagerを初期化
         partyManager.Init();
-        cameraController.Init(partyManager.partyControllers[0].GetComponent<PlayerController>());
+        //カメラコントローラーを初期化
+        cameraController.Init(partyManager.playerController);
         Params.gameMode = GameMode.WALK;
 
         enemyController.Init();
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         switch (Params.gameMode)
         {
             case GameMode.WALK:
+                //カメラの追従処理
                 cameraController.FollowPlayer();
                 partyManager.Walk();
 
