@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtleManager : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
     [SerializeField] PlayerButton playerButtonPrefab;
     [SerializeField] ChosenSkillImage chosenSkillImagePrefab;
     [SerializeField] RectTransform layer0;
     [SerializeField] RectTransform skillChoosePanel;
     [SerializeField] SkillButton skillButtonPrefab;
-    [SerializeField] RectTransform buttleUI;
+    [SerializeField] RectTransform BattleUI;
 
 
 
@@ -20,22 +20,22 @@ public class ButtleManager : MonoBehaviour
     /// </summary>
     public void Init()
     {
-        buttleUI.gameObject.SetActive(false);
+        BattleUI.gameObject.SetActive(false);
         skillChoosePanel.gameObject.SetActive(false);
         SkillButtonGenerator();
-        PlayerButtleUIGenerator();
+        PlayerBattleUIGenerator();
         int partyMemberNum = DataManager.userData.partyMemberIndexces.Length;
-        ButtleStatus.i.partyMembers = new OwnedCharactor[partyMemberNum];
+        BattleStatus.i.partyMembers = new OwnedCharactor[partyMemberNum];
     }
 
     /// <summary>
     /// バトル開始時
     /// </summary>
-    public void ButtleInitialize()
+    public void BattleInitialize()
     {
-        buttleUI.gameObject.SetActive(true);
+        BattleUI.gameObject.SetActive(true);
 
-        SetButtlePartyMember();
+        SetBattlePartyMember();
 
         SetDefaultStatus();
     }
@@ -43,16 +43,16 @@ public class ButtleManager : MonoBehaviour
     /// <summary>
     /// バトル終了時
     /// </summary>
-    public void ButtleFinalize()
+    public void BattleFinalize()
     {
         skillChoosePanel.gameObject.SetActive(false);
-        buttleUI.gameObject.SetActive(false);
+        BattleUI.gameObject.SetActive(false);
     }
 
     /// <summary>
     /// バトル中
     /// </summary>
-    public void ButtleUpdate()
+    public void BattleUpdate()
     {
         //ボタン以外をタッチしたらスキルパネルを閉じる
         if (!IsButtonTap())
@@ -61,31 +61,31 @@ public class ButtleManager : MonoBehaviour
         }
     }
 
-    void SetButtlePartyMember()
+    void SetBattlePartyMember()
     {
-        for (int i = 0; i < ButtleStatus.i.partyMembers.Length; i++)
+        for (int i = 0; i < BattleStatus.i.partyMembers.Length; i++)
         {
             //パーティメンバーの所有インデックスを取得
             int ownedCharactorIndex = DataManager.userData.partyMemberIndexces[i];
             //バトルに参加するパーティメンバーの配列にキャラクター情報を格納する
-            ButtleStatus.i.partyMembers[i] = DataManager.userData.ownedCharactorList[ownedCharactorIndex];
+            BattleStatus.i.partyMembers[i] = DataManager.userData.ownedCharactorList[ownedCharactorIndex];
             //ボタンにパーティメンバーのインデックスを割り当てる
-            ButtleStatus.i.playerUIs[i].playerButton.partyMemberIndex = i;
+            BattleStatus.i.playerUIs[i].playerButton.partyMemberIndex = i;
         }
     }
 
     void SetDefaultStatus()
     {
         //デフォルトの攻撃状態をセット
-        for (int i = 0; i < ButtleStatus.i.playerUIs.Length; i++)
+        for (int i = 0; i < BattleStatus.i.playerUIs.Length; i++)
         {
             //キャラクターの0番目に設定されているスキルIDを取得
-            OwnedCharactor partyMember = ButtleStatus.i.partyMembers[i];
+            OwnedCharactor partyMember = BattleStatus.i.partyMembers[i];
             int skillID = partyMember.status.buttleSkills[0];
             string charaName = partyMember.charactorSpec.name;
-            ButtleInfo info = new ButtleInfo(skillID);
-            ButtleStatus.i.players.Add(info);
-            PlayerUI playerUI = ButtleStatus.i.playerUIs[i];
+            BattleInfo info = new BattleInfo(skillID);
+            BattleStatus.i.players.Add(info);
+            PlayerUI playerUI = BattleStatus.i.playerUIs[i];
             //スキルテキストを変更
             playerUI.chosenSkillImage.setSkillText(skillID);
             //キャラクター名を表示
@@ -113,26 +113,26 @@ public class ButtleManager : MonoBehaviour
     {
 
         Vector3 pos = new Vector3(Constants.FIRST_SKILL_BUTTON_X, 0, 0);
-        ButtleStatus.i.skillButtons = new SkillButton[Constants.SKILL_BUTTON_NUM];
-        for (int i = 0; i < ButtleStatus.i.skillButtons.Length; i++)
+        BattleStatus.i.skillButtons = new SkillButton[Constants.SKILL_BUTTON_NUM];
+        for (int i = 0; i < BattleStatus.i.skillButtons.Length; i++)
         {
-            ButtleStatus.i.skillButtons[i] = Instantiate(skillButtonPrefab, Vector3.zero, Quaternion.identity);
-            ButtleStatus.i.skillButtons[i].Init(pos, skillChoosePanel);
+            BattleStatus.i.skillButtons[i] = Instantiate(skillButtonPrefab, Vector3.zero, Quaternion.identity);
+            BattleStatus.i.skillButtons[i].Init(pos, skillChoosePanel);
             pos += new Vector3(Constants.SKILL_BUTTON_OFFSET_X, 0, 0);
         }
     }
 
-    void PlayerButtleUIGenerator()
+    void PlayerBattleUIGenerator()
     {
         float x = Constants.FIRST_PLAYER_UI_X;
 
-        ButtleStatus.i.playerUIs = new PlayerUI[Constants.PLAYER_UI_NUM];
-        for (int i = 0; i < ButtleStatus.i.playerUIs.Length; i++)
+        BattleStatus.i.playerUIs = new PlayerUI[Constants.PLAYER_UI_NUM];
+        for (int i = 0; i < BattleStatus.i.playerUIs.Length; i++)
         {
             PlayerButton btn = Instantiate(playerButtonPrefab, Vector3.zero, Quaternion.identity);
             ChosenSkillImage image = Instantiate(chosenSkillImagePrefab, Vector3.zero, Quaternion.identity);
-            ButtleStatus.i.playerUIs[i] = new PlayerUI(btn, image);
-            PlayerUI playerUI = ButtleStatus.i.playerUIs[i];
+            BattleStatus.i.playerUIs[i] = new PlayerUI(btn, image);
+            PlayerUI playerUI = BattleStatus.i.playerUIs[i];
             playerUI.playerButton.Init(layer0, new Vector3(x, Constants.PLAYER_UI_BUTTON_Y, 0), skillChoosePanel);
             playerUI.chosenSkillImage.Init(layer0, new Vector3(x, Constants.PLAYER_UI_IMAGE_Y, 0));
 

@@ -38,8 +38,8 @@ public class SkillButton : MonoBehaviour
         //スキルパネルを閉じる
         skillChoosePanel.gameObject.SetActive(false);
         //攻撃するスキルIDをセット
-        ButtleStatus.i.players[playerButtonNum].skillID = skillID;
+        BattleStatus.i.players[playerButtonNum].skillID = skillID;
         //スキルテキストを変更
-        ButtleStatus.i.playerUIs[playerButtonNum].chosenSkillImage.setSkillText(skillID);
+        BattleStatus.i.playerUIs[playerButtonNum].chosenSkillImage.setSkillText(skillID);
     }
 }

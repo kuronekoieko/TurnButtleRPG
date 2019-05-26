@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    CameraController cameraController;
+
     public void Init()
     {
         transform.localScale = new Vector3(-1, 1, 1);
     }
 
 
-    public void SetCameraController(CameraController cameraController)
+
+    public void SetRotate(float rotationX)
     {
-        this.cameraController = cameraController;
-    }
-    public void SetRotate()
-    {   
-        transform.rotation = Quaternion.Euler(cameraController.transform.localEulerAngles.x, 0, 0);
+        //
+        transform.rotation = Quaternion.Euler(rotationX, 0, 0);
     }
 
 }

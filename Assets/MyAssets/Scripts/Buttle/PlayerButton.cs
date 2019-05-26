@@ -36,22 +36,22 @@ public class PlayerButton : MonoBehaviour
         skillChoosePanel.gameObject.SetActive(true);
 
         //スキルボタンにプレイヤーごとにスキルをセットする
-        for (int i = 0; i < ButtleStatus.i.skillButtons.Length; i++)
+        for (int i = 0; i < BattleStatus.i.skillButtons.Length; i++)
         {
             string skillName = "";
             int skillID = 0;
 
-            if (i == ButtleStatus.i.skillButtons.Length - 1)
+            if (i == BattleStatus.i.skillButtons.Length - 1)
             {
                 skillID = 1;
             }
             else
             {
-                skillID = ButtleStatus.i.partyMembers[partyMemberIndex].status.buttleSkills[i];
+                skillID = BattleStatus.i.partyMembers[partyMemberIndex].status.buttleSkills[i];
             }
             skillName = DataManager.skillList[skillID].name;
 
-            ButtleStatus.i.skillButtons[i].SetParam(skillID, partyMemberIndex);
+            BattleStatus.i.skillButtons[i].SetParam(skillID, partyMemberIndex);
         }
     }
 

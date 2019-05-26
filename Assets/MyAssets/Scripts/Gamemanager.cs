@@ -6,13 +6,13 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    PlayerController playerController;
-    [SerializeField] CameraController cameraController;
-    [SerializeField] PartyController[] partyControllers;
 
+    [SerializeField] CameraController cameraController;
     [SerializeField] EnemyController enemyController;
-    [SerializeField] ButtleManager buttleManager;
+    [SerializeField] BattleManager BattleManager;
     [SerializeField] DataManager dataManager;
+    [SerializeField] PartyManager partyManager;
+
     float time;
 
 
@@ -20,18 +20,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         dataManager.Init();
-        playerController = partyControllers[0].GetComponent<PlayerController>();
-        playerController.Init();
-        cameraController.Init(playerController);
+        partyManager.Init();
+        cameraController.Init(partyManager.partyControllers[0].GetComponent<PlayerController>());
         Params.gameMode = GameMode.WALK;
-        for (int i = 0; i < partyControllers.Length; i++)
-        {
-            partyControllers[i].SetCameraController(cameraController);
-        }
-        enemyController.Init();
-        enemyController.SetCameraController(cameraController);
 
-        buttleManager.Init();
+        enemyController.Init();
+
+        BattleManager.Init();
     }
 
     void FixedUpdate()
@@ -40,22 +35,13 @@ public class GameManager : MonoBehaviour
         {
             case GameMode.WALK:
                 cameraController.FollowPlayer();
-                for (int i = 0; i < partyControllers.Length; i++)
-                {
-                    partyControllers[i].Walk();
-                }
+                partyManager.Walk();
 
-                time += Time.fixedDeltaTime;
-                if (time > 5)
-                {
-                    Params.gameMode = GameMode.BUTTLE_START;
-                    time = 0;
-                }
+                EnemyEncounter();
 
                 break;
-            case GameMode.BUTTLE_START:
-                cameraController.MoveButtleStartCam();
-                //ChangeRotate();
+            case GameMode.CAM_MOVE_UP_START:
+                cameraController.MoveBattleStartCam();
 
                 Params.gameMode = GameMode.CAM_MOVE_UP;
                 break;
@@ -64,62 +50,51 @@ public class GameManager : MonoBehaviour
                 break;
             case GameMode.CAM_MOVE_UP_COMPLETED:
                 cameraController.GetCenter();
-                MoveButllePos();
+                partyManager.MoveButllePos(cameraController);
                 Params.gameMode = GameMode.ENEMY_APPEAR;
                 break;
             case GameMode.ENEMY_APPEAR:
                 enemyController.gameObject.SetActive(true);
 
                 enemyController.transform.position = new Vector3(cameraController.centerX - 6, 1, cameraController.centerZ + 0);
-                buttleManager.ButtleInitialize();
-                Params.gameMode = GameMode.BUTTLE;
+                BattleManager.BattleInitialize();
+                Params.gameMode = GameMode.BATTLE;
                 break;
-            case GameMode.BUTTLE:
-                buttleManager.ButtleUpdate();
+            case GameMode.BATTLE:
+                BattleManager.BattleUpdate();
                 break;
             case GameMode.RESULT:
                 break;
-            case GameMode.BUTTLE_END:
-                buttleManager.ButtleFinalize();
+            case GameMode.BATTLE_END:
+                BattleManager.BattleFinalize();
                 enemyController.gameObject.SetActive(false);
-                for (int i = 0; i < partyControllers.Length; i++)
-                {
-                    partyControllers[i].MoveBeforeButllePos();
-                }
+                partyManager.MoveWalkPosStart();
                 Params.gameMode = GameMode.CAM_MOVE_DOWN;
                 break;
             case GameMode.CAM_MOVE_DOWN:
 
                 break;
             case GameMode.CAM_MOVE_DOWN_COMPLETED:
-                cameraController.MoveButtleEndCam();
+                cameraController.MoveBattleEndCam();
                 Params.gameMode = GameMode.WALK;
                 break;
             default:
                 break;
         }
-        ChangeRotate();
+        partyManager.ChangeRotate(cameraController.transform.localEulerAngles.x);
+        enemyController.SetRotate(cameraController.transform.localEulerAngles.x);
     }
 
-    void MoveButllePos()
+    void EnemyEncounter()
     {
-
-        Vector3 pos = new Vector3(cameraController.centerX + 6, 1, cameraController.centerZ + 4);
-
-        for (int i = 0; i < partyControllers.Length; i++)
+        time += Time.fixedDeltaTime;
+        if (time > 5)
         {
-            partyControllers[i].MoveButllePos(pos);
-            pos += new Vector3(1, 0, -3);
+            Params.gameMode = GameMode.CAM_MOVE_UP_START;
+            time = 0;
         }
     }
 
-    void ChangeRotate()
-    {
-        for (int i = 0; i < partyControllers.Length; i++)
-        {
-            partyControllers[i].SetRotate();
-        }
-        enemyController.SetRotate();
-    }
+
 
 }

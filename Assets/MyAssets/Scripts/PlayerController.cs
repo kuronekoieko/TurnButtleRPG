@@ -82,6 +82,7 @@ public class PlayerController : PartyController
             time = 0;
             keyX = 0;
             tapPos = Input.mousePosition;
+
         }
         if (Input.GetMouseButton(0))
         {
@@ -123,7 +124,7 @@ public class PlayerController : PartyController
             default:
                 break;
         }
-
+        //Debug.Log(dx);
         transform.Translate(dx, 0, 0);
         SetLocalScaleX(dx);
     }

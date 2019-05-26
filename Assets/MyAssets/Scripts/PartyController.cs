@@ -5,14 +5,8 @@ using DG.Tweening;
 
 public abstract class PartyController : MonoBehaviour
 {
-    CameraController cameraController;
     Vector3 walkPos;
     float walkLocalScaleX;
-
-    public void SetCameraController(CameraController cameraController)
-    {
-        this.cameraController = cameraController;
-    }
     public void MoveButllePos(Vector3 pos)
     {
         walkPos = transform.position;
@@ -35,9 +29,10 @@ public abstract class PartyController : MonoBehaviour
              {
                  SetLocalScaleX(walkLocalScaleX);
              })
-             .OnComplete(()=>{
-            Params.gameMode = GameMode.CAM_MOVE_DOWN_COMPLETED;
-        });
+             .OnComplete(() =>
+             {
+                 //Params.gameMode = GameMode.CAM_MOVE_DOWN_COMPLETED;
+             });
     }
 
     protected void SetLocalScaleX(float x)
@@ -48,9 +43,10 @@ public abstract class PartyController : MonoBehaviour
         transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
     }
 
-    public void SetRotate()
+    public void SetRotate(float rotationX)
     {
-        transform.rotation = Quaternion.Euler(cameraController.transform.localEulerAngles.x, 0, 0);
+        //cameraController.transform.localEulerAngles.x
+        transform.rotation = Quaternion.Euler(rotationX, 0, 0);
 
     }
 

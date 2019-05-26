@@ -9,9 +9,9 @@ public class CameraController : MonoBehaviour
     PlayerController playerController;
     Vector3 playerToCamVec;
     float camRotationXInWalk;
-
     [NonSerialized] public float centerX;
     [NonSerialized] public float centerZ;
+    Vector3 centerPos;
 
     public void Init(PlayerController playerController)
     {
@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void MoveButtleStartCam()
+    public void MoveBattleStartCam()
     {
         camRotationXInWalk = transform.localEulerAngles.x;
 
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
       );
     }
 
-    public void MoveButtleEndCam()
+    public void MoveBattleEndCam()
     {
         Vector3 pos = transform.position - Constants.BUTTLE_CAM_OFFSET;
         transform
@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
              .SetEase(Ease.InOutSine)
              .OnComplete(() =>
              {
-
+                 Params.gameMode = GameMode.CAM_MOVE_DOWN_COMPLETED;
              });
 
         transform.DORotate(

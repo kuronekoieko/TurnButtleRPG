@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugButton : MonoBehaviour
+public class AttackButton : MonoBehaviour
 {
+
+
+
     public void OnClick()
     {
 
-        Params.gameMode = GameMode.BATTLE_END;
     }
 }
